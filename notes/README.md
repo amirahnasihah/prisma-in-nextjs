@@ -174,3 +174,72 @@ model Post {
 ```
 
 the url will change to http://localhost:3000/posts/first-post and unique.
+
+## GET length of all posts (how many)
+
+easy and common way using `.length`, but this method count for all:
+
+```ts
+<h1 className="text-3xl font-semibold">All Posts ({posts.length})</h1>
+```
+
+### GET length based on certain conditions (where)
+
+> https://www.prisma.io/docs/orm/prisma-client/queries/filtering-and-sorting
+
+if we want to count certain posts, based on certain conditions like for when pagination. we want to take posts per page:
+
+**basic filtering with the `where` query option, and sorting with the `orderBy` query option.**
+
+```ts
+const posts = await prisma.post.findMany({
+  where: {
+    title: {
+      endsWith: "post",
+    },
+  },
+  orderBy: {
+    createdAt: "desc",
+  },
+  select: {
+    id: true,
+    title: true,
+    slug: true,
+  },
+  take: 1,
+  skip: 1,
+});
+```
+
+- `take` & `skip` interesting used for pagination.
+- `take` for pagination -> show how many post per page
+
+advanced concept:
+
+```ts
+const result = await prisma.user.findMany({
+  where: {
+    email: {
+      endsWith: 'prisma.io',
+    },
+    posts: {
+      some: {
+        published: true,
+      },
+    },
+  },
+  include: {
+    posts: {
+      where: {
+        published: true,
+      },
+    },
+  },
+})
+```
+
+**count posts**:
+
+```ts
+
+```

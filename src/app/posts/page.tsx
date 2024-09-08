@@ -4,11 +4,28 @@ import prisma from "@/lib/db";
 import Link from "next/link";
 
 const PostsPage = async () => {
-  const posts = await prisma.post.findMany({});
+  const posts = await prisma.post.findMany({
+    where: {
+      title: {
+        endsWith: "post",
+      },
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+    select: {
+      id: true,
+      title: true,
+      slug: true,
+      createdAt: true,
+    },
+  });
+
+  const postsCount = await prisma.post.count();
 
   return (
     <main className="flex flex-col items-center justify-center gap-y-5 pt-24 text-center">
-      <h1 className="text-3xl font-semibold">All Posts (0)</h1>
+      <h1 className="text-3xl font-semibold">All Posts ({postsCount})</h1>
 
       <ul className="border-t border-b border-black/10 py-5 leading-8">
         {posts.map((post) => (
