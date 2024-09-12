@@ -4,6 +4,7 @@ import prisma from "@/lib/db";
 import Link from "next/link";
 
 const PostsPage = async () => {
+  // idiomatic way in nextjs to get data
   const posts = await prisma.post.findMany({
     where: {
       title: {
@@ -21,6 +22,7 @@ const PostsPage = async () => {
     },
   });
 
+  // pragmatically using count instead of length
   const postsCount = await prisma.post.count();
 
   return (

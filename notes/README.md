@@ -241,5 +241,9 @@ const result = await prisma.user.findMany({
 **count posts**:
 
 ```ts
+// pragmatically using count instead of length
+const postsCount = await prisma.post.count();
 
+// ...
+<h1 className="text-3xl font-semibold">All Posts ({postsCount})</h1>
 ```
