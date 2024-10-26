@@ -34,7 +34,7 @@ const PostsPage = async () => {
           <li key={post.id} className="flex items-center justify-between px-5">
             {/* 1. http://localhost:3000/posts/cm0ta66gh0000syf3y0tyj5sc */}
             {/* 2. now, change the href from {`/posts/${post.id}`} to slug {`/posts/${post.slug}`} -> but get strange string formatting = so create separate field in schema prisma called slug and @unique */}
-            <Link className="text-blue-600" href={`/posts/${post.slug}`}>
+            <Link className="text-orange-400" href={`/posts/${post.slug}`}>
               {post.title}
             </Link>
             <span className="text-black/50 ml-2">

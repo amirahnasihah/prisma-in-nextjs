@@ -4,6 +4,12 @@ Prisma is a database toolkit and an Object-Relational Mapping (ORM) layer that s
 
 > fav way to work with database
 
+Get Started:
+
+1. npm install
+2. create data.db in prisma folder
+3. add database file url to .env file
+
 ## Prisma Client
 
 In the real world we dont really know what you're doing in the beginning with the model of database. so, whenever you change a schema in the beginning, you may want to run this command to push the changes made in your schema to the actual database.
@@ -247,3 +253,20 @@ const postsCount = await prisma.post.count();
 // ...
 <h1 className="text-3xl font-semibold">All Posts ({postsCount})</h1>
 ```
+
+## prisma offset pagination
+
+> https://www.prisma.io/docs/orm/prisma-client/queries/pagination
+> Prisma Client supports both offset pagination and cursor-based pagination.
+
+### Offset pagination
+
+Offset pagination uses skip and take to skip a certain number of results and select a limited range. The following query skips the first 3 Post records and returns records 4 - 7:
+
+![https://www.prisma.io/docs/assets/images/offset-skip-take-761acfc939aa498db1a8a48a1b7c1a38.png]
+
+To implement pages of results, you would just skip the number of pages multiplied by the number of results you show per page.
+
+### Cursor-based pagination
+
+Cursor-based pagination uses cursor and take to return a limited set of results before or after a given cursor. A cursor bookmarks your location in a result set and must be a unique, sequential column - such as an ID or a timestamp.
